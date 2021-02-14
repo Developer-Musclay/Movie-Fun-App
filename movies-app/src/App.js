@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Header, MovieList, MovieDetails, Loading, SearchBar } from './components';
+import { Header } from './components';
+import Movies from './features/movies';
 import apiMovie, { apiMovieMap }  from './conf/api.movie';
 class App extends Component {
 
@@ -38,16 +39,14 @@ class App extends Component {
   render(){
     return (
       <div className="App d-flex flex-column">
-        <Header />
-        <SearchBar updateMovies={ this.updateMovies } />
-        { this.state.loaded ? (
-          <div className="d-flex flex-row flex-fill pt-4 p-2">
-            <MovieList movies={ this.state.movies } updateSelectedMovie={ this.updateSelectedMovie }/>
-            <MovieDetails movie={ this.state.movies[this.state.selectedMovie] }/>
-          </div>    
-        ) : (
-          <Loading />
-        )}         
+        <Header />  
+        <Movies 
+          loaded={ this.state.loaded }
+          updateMovies={ this.updateMovies }
+          updateSelectedMovie={ this.updateSelectedMovie }
+          movies= { this.state.movies }
+          selectedMovie={ this.state.selectedMovie }
+        />     
       </div>
     );
   }
